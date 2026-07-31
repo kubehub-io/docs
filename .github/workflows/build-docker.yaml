@@ -68,4 +68,4 @@ jobs:
           cache-to: type=gha,mode=max
 
       - name: InspectImage
-        run: docker buildx imagetools inspect ${{ github.repository }}:${{ env.IMAGE_TAG }}          
+        run: docker buildx imagetools inspect ghcr.io/${{ github.repository }}:${{ env.IMAGE_TAG }}          
