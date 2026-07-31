@@ -68,6 +68,10 @@ jobs:
           cache-to: type=gha,mode=max
           outputs: type=docker
 
+      - name: Inspect local image
+        run: |
+          docker image inspect docs:build
+
       - name: Install regctl
         uses: regclient/actions/regctl-installer@main
 
