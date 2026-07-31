@@ -1,0 +1,34 @@
+// Kubernetes docs style color scheme
+$primary: #30638e;
+$secondary: #ffa630;
+$success: #3772ff;
+$info: #c0e0de;
+$warning: #ed6a5a;
+$danger: #ed6a5a;
+$light: #f8f9fa;
+$dark: #1f1f1f;
+
+$link-color: #30638e;
+
+$google_font_name: "Inter";
+$google_font_family: "Inter:wght@400;500;600;700&display=swap";
+
+$td-enable-google-fonts: true;
+
+$font-family-sans-serif: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$font-family-monospace: "SF Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+// Content
+$td-block-space-top-base: 2 * $spacer;
+$td-block-space-bottom-base: 2 * $spacer;
+
+// Sidebar
+$sidebar-link-color: #555;
+$sidebar-active-color: #30638e;
+
+// Font weights
+$font-weight-light: 400;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 600;
+$font-weight-body-text: 400;

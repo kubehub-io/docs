@@ -1,0 +1,13 @@
+{{ with .Site.Params.ui.showLightDarkModeMenu -}}
+<script>
+(() => {
+  const themeKey = 'td-color-theme';
+  const storedTheme = localStorage.getItem(themeKey);
+  const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const theme = storedTheme === 'light' || storedTheme === 'dark'
+    ? storedTheme
+    : (isDark ? 'dark' : 'light');
+  document.documentElement.setAttribute('data-bs-theme', theme);
+})();
+</script>
+{{- end }}
