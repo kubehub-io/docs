@@ -77,12 +77,12 @@ jobs:
 
       - name: Inspect image
         run: |
-          regctl image inspect ghcr.io/${{ github.repository }}:${{ env.IMAGE_TAG }}
+          regctl image inspect --platform local ghcr.io/${{ github.repository }}:${{ env.IMAGE_TAG }}
 
       - name: Modify Platform
         run: |
-          regctl image mod --replace --config-platform="" ghcr.io/${{ github.repository }}:${{ env.IMAGE_TAG }}
+          regctl image mod --platform local --replace --config-platform="" ghcr.io/${{ github.repository }}:${{ env.IMAGE_TAG }}
 
       - name: Inspect image after modify
         run: |
-          regctl image inspect ghcr.io/${{ github.repository }}:${{ env.IMAGE_TAG }}   
+          regctl image inspect --platform local ghcr.io/${{ github.repository }}:${{ env.IMAGE_TAG }}   
