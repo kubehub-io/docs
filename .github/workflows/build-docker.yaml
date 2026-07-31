@@ -70,7 +70,7 @@ jobs:
 
       - name: Inspect local image
         run: |
-          docker image inspect docs:build
+          docker image inspect ghcr.io/${{ github.repository }}:${{ env.IMAGE_TAG }}
 
       - name: Install regctl
         uses: regclient/actions/regctl-installer@main
