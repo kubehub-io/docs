@@ -21,4 +21,4 @@ RUN npm install --omit=dev autoprefixer && \
 # try Image Volume
 FROM scratch
 COPY --from=hugo-builder /site/public /site
-COPY nginx.conf /nginx.conf
+COPY nginx.conf /config/nginx.conf
