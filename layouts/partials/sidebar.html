@@ -1,0 +1,70 @@
+{{/* Determine content type from the current page */ -}}
+{{ $isBlog := or (eq .Section "blogs") (eq .Type "blog") -}}
+
+{{/* Cache logic: only cache the sidebar for bigger sites */ -}}
+{{ $sidebarCacheLimit := .Site.Params.ui.sidebar_cache_limit | default 2000 -}}
+{{ $shouldCache := ge (len .Site.Pages) $sidebarCacheLimit -}}
+
+{{ if $isBlog -}}
+{{/* Blog sidebar: list all blog posts */ -}}
+<div id="td-sidebar-menu" class="td-sidebar__inner">
+  {{ if not .Site.Params.ui.sidebar_search_disable -}}
+  <form class="td-sidebar__search d-flex align-items-center">
+    {{ partial "search-input.html" . }}
+    <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ms-3 fas fa-bars" type="button" data-bs-toggle="collapse" data-bs-target="#td-section-nav" aria-controls="td-section-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    </button>
+  </form>
+  {{ else -}}
+  <div id="content-desktop"></div>
+  {{ end -}}
+  <nav class="td-sidebar-nav
+      {{- if .Site.Params.ui.sidebar_search_disable }} td-sidebar-nav--search-disabled{{ end -}}
+      {{- if .Site.Params.ui.sidebar_menu_foldable }} foldable-nav{{ end -}}
+      " id="td-section-nav">
+    <ul class="td-sidebar-nav__section pe-md-3 ul-0">
+      {{ $mid := printf "m-%s" ("blogs" | anchorize) }}
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="{{ $mid }}-li">
+        <a href="{{ `blogs/` | relURL }}"
+           class="align-left ps-0 td-sidebar-link td-sidebar-link__section td-sidebar-link__section tree-root"
+           id="{{ $mid }}">
+          <span class="td-sidebar-nav-active-item">Blog</span>
+        </a>
+        <ul class="ul-1">
+          {{ $blogPages := sort (where .Site.RegularPages "Type" "blog") "Date" "desc" }}
+          {{ range $blogPages }}
+          {{ $active := eq .RelPermalink $.RelPermalink }}
+          <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child{{ if $active }} active{{ end }}" id="{{ .RelPermalink | anchorize }}-li">
+            <a href="{{ .RelPermalink }}"
+               class="align-left ps-0 td-sidebar-link td-sidebar-link__page{{ if $active }} active{{ end }}"
+               id="{{ .RelPermalink | anchorize }}">
+              <span>{{ .Title }}</span>
+            </a>
+          </li>
+          {{ end }}
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</div>
+{{ else -}}
+{{/* Docs sidebar: original Docsy behavior */ -}}
+{{ if $shouldCache -}}
+  {{ $mid := printf "m-%s" (.RelPermalink | anchorize) }}
+  <script>
+    $(function() {
+    $("#td-section-nav a").removeClass("active");
+    $("#td-section-nav #{{ $mid }}").addClass("active"); 
+    $("#td-section-nav #{{ $mid }}-li span").addClass("td-sidebar-nav-active-item"); 
+    $("#td-section-nav #{{ $mid }}").parents("li").addClass("active-path"); 
+    $("#td-section-nav li.active-path").addClass("show"); 
+    $("#td-section-nav li.active-path").children("input").prop('checked', true);
+    $("#td-section-nav #{{ $mid }}-li").siblings("li").addClass("show");  
+    $("#td-section-nav #{{ $mid }}-li").children("ul").children("li").addClass("show");  
+    $("#td-sidebar-menu").toggleClass("d-none"); 
+    });
+  </script>
+  {{ partialCached "sidebar-tree.html" . .FirstSection.RelPermalink }}
+{{ else -}}
+  {{ partial "sidebar-tree.html" . }}
+{{- end -}}
+{{- end }}
