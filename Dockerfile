@@ -18,12 +18,7 @@ COPY . .
 RUN npm install --omit=dev autoprefixer && \
     hugo --gc --minify
 
-FROM nginx:alpine
-
-COPY --from=hugo-builder /site/public /usr/share/nginx/html
-
-COPY nginx.conf /etc/nginx/nginx.conf
-
-EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"]
+# try Image Volume
+FROM scratch
+COPY --from=hugo-builder /site/public /site
+COPY nginx.conf /config/nginx.conf
