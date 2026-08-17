@@ -1,0 +1,19 @@
+on:
+  workflow_dispatch:
+  schedule:
+  - cron: '0 0 * * 0'
+
+jobs:
+  clean:
+    runs-on: ubuntu-latest
+    name: Delete old test images
+    steps:
+    - uses: snok/container-retention-policy@v3.1.0
+      with:
+        account: kubehub-io
+        token: ${{ secrets.GITHUB_TOKEN }}
+        image-names: "docs"
+        image-tags: "main-*"
+        cut-off: 3w
+        dry-run: true
+        keep-n-most-recent: 5

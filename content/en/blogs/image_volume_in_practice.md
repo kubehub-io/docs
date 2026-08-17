@@ -15,9 +15,9 @@ Kubernetes introduced Image Volumes as an alpha feature in 1.31, moved them to b
 
 I think this is a really useful feature, especially when you have a large piece of data that you don't want tied to the lifecycle of the container that consumes it.
 
-The obvious example is a huge AI model: ```nference runtime``` + ```100 GB model```. there is no good reason to rebuild the inference runtime every time the model changes, lots of image cache wasted.
+The obvious example is a huge AI model: ```inference runtime``` + ```100 GB model```. there is no good reason to rebuild the inference runtime every time the model changes, lots of image cache wasted.
 
-But the use case I'm interested in is a little more generic: **separating runtime images from application content**, that daily developer may also facing.
+But the use case I'm interested in is a little more generic: **separating runtime images from application content**, a problem that developers may also run into.
 
 For example:
 
