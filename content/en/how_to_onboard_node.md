@@ -27,10 +27,16 @@ You need at least one node. Almost any machine works:
 
 ## Step 3: Join the node to your cluster
 
-The portal will show you the exact installation instructions. From a computer that can reach your machine:
+We do need to run quite some setups on the machine:
+- config static IP (kubernetes really rely on node IP to be static)
+- config laptop not to sleep when lid closed
+- install containerd/kubelet/other dependencies
 
-SSH into the node and run:
-```
+the tool is open sourced here: https://github.com/kubehub-io/cli, so you can inspect, also if you need customize, feel free to change and compile, you are welcome to send PR as well. 
+
+Here is the command you will need to run, be sure to **SSH into the node** (for better auth experience, explained later) and run:
+
+```bash
 CLUSTER=<clusterName>
 ARCH="$(uname -m | sed 's/aarch64/arm64/')"
 sudo curl -o /usr/bin/kubehubcli -L https://github.com/kubehub-io/cli/releases/download/latest/cli_Linux_$(ARCH)

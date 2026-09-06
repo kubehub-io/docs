@@ -5,7 +5,7 @@ info:
   description: Public API for HKS cluster management
 servers:
   - url: /
-    description: Local server
+    description: Kubehub API
 paths:
   /apis/v202607/clusters:
     get:
@@ -565,6 +565,8 @@ components:
           $ref: '#/components/schemas/ManagedIngressProfile'
         storageProfile:
           $ref: '#/components/schemas/StorageProfile'
+        monitoringProfile:
+          $ref: '#/components/schemas/MonitoringProfile'
     ComponentProfile:
       type: object
       properties:
@@ -574,12 +576,21 @@ components:
         version:
           type: string
           description: Component version
+        dependencies:
+          type: array
+          items:
+            type: string
+          description: Component dependencies
     ClusterStatus:
       type: object
       properties:
         publicDns:
           type: string
           description: Cluster public DNS
+        localDnsDomain:
+          type: string
+          description: Local DNS domain derived from the cluster's managed ingress profile
+          readOnly: true
         state:
           type: string
           description: Cluster state
@@ -588,6 +599,11 @@ components:
           additionalProperties:
             $ref: '#/components/schemas/ComponentProfile'
           description: Cluster control plane components
+        addonComponents:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ComponentProfile'
+          description: Cluster addon components
         lastOperation:
           $ref: '#/components/schemas/OperationStatus'
     ClusterRequest:
@@ -625,6 +641,12 @@ components:
       properties:
         backend:
           $ref: '#/components/schemas/StorageBackend'
+    MonitoringProfile:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Whether monitoring is enabled for the cluster
     Node:
       type: object
       properties:
