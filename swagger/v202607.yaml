@@ -835,6 +835,9 @@ components:
           description: Protocol (HTTP or TLS, defaults to HTTP)
           enum: [HTTP, TLS]
           default: HTTP
+        customDomain:
+          type: string
+          description: Custom domain for public access (must CNAME to the public DNS)
     PublicDNSStatus:
       type: object
       properties:
