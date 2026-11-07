@@ -1,21 +1,34 @@
 {
-  "name": "docs",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
   "author": "",
-  "license": "ISC",
-  "type": "commonjs",
+  "comments": {
+    "dependencies": {
+      "autoprefixer": "project",
+      "postcss": "project",
+      "postcss-cli": "project"
+    },
+    "devDependencies": {
+      "puppeteer": "project"
+    }
+  },
   "dependencies": {
-    "autoprefixer": "^10.5.4",
+    "autoprefixer": "^10.6.2",
     "postcss": "^8.5.23",
     "postcss-cli": "^11.0.1"
   },
+  "description": "",
   "devDependencies": {
     "puppeteer": "^25.3.0"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "main": "index.js",
+  "name": "docs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "commonjs",
+  "version": "1.0.0",
+  "allowScripts": {
+    "puppeteer@25.16.0": true
   }
 }

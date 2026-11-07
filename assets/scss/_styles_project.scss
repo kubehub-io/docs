@@ -319,7 +319,7 @@
 }
 
 // Not found page
-.td-404 {
+.td-main .td-404 {
   position: relative;
   display: grid;
   min-height: calc(100vh - 8rem);
@@ -417,7 +417,7 @@
   }
 }
 
-[data-bs-theme="dark"] {
+[data-bs-theme="dark"] .td-main {
   .td-404 {
     &::before {
       background-image: linear-gradient(rgba(192, 224, 222, 0.06) 1px, transparent 1px),
