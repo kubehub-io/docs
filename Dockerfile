@@ -26,7 +26,7 @@ COPY . .
 
 RUN npm install --omit=dev autoprefixer && \
     hugo mod npm pack && \
-    npm install --prefix packages/hugoautogen && \
+    npm install && \
     hugo --gc --minify
 
 # try Image Volume
