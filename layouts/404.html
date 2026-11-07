@@ -1,0 +1,20 @@
+{{ define "main" -}}
+<section class="td-404" aria-labelledby="td-404-title">
+  <div class="td-404__glow" aria-hidden="true"></div>
+  <div class="td-404__content">
+    <div class="td-404__code" aria-hidden="true">404</div>
+    <p class="td-404__eyebrow">Route not found</p>
+    <h1 id="td-404-title">Looks like this page drifted into the void.</h1>
+    <p class="td-404__message">
+      The link may be out of date, or the page may have moved. Let’s get you back to useful things.
+    </p>
+    <div class="td-404__actions">
+      <a class="btn btn-primary" href="{{ .Site.Home.RelPermalink }}">Back to documentation</a>
+      <a class="btn btn-outline-primary" href="{{ "blogs/" | relURL }}">Read the blog</a>
+    </div>
+    <p class="td-404__hint">
+      Try searching from the <a href="{{ "search/" | relURL }}">documentation search</a> if you’re looking for something specific.
+    </p>
+  </div>
+</section>
+{{- end }}

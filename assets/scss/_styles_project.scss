@@ -318,6 +318,130 @@
   }
 }
 
+// Not found page
+.td-404 {
+  position: relative;
+  display: grid;
+  min-height: calc(100vh - 8rem);
+  place-items: center;
+  overflow: hidden;
+  padding: 5rem 1.5rem 6rem;
+  text-align: center;
+  isolation: isolate;
+
+  &::before {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background-image: linear-gradient(rgba(48, 99, 142, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(48, 99, 142, 0.06) 1px, transparent 1px);
+    background-size: 3rem 3rem;
+    content: "";
+    mask-image: linear-gradient(to bottom, transparent, black 25%, black 75%, transparent);
+  }
+
+  &__glow {
+    position: absolute;
+    z-index: -1;
+    width: 80vw;
+    max-width: 32rem;
+    height: 80vw;
+    max-height: 32rem;
+    border-radius: 50%;
+    background: rgba(48, 99, 142, 0.12);
+    filter: blur(80px);
+  }
+
+  &__content {
+    max-width: 42rem;
+  }
+
+  &__code {
+    margin-bottom: 0.25rem;
+    color: $primary;
+    font-size: clamp(5rem, 18vw, 10rem);
+    font-weight: 700;
+    letter-spacing: -0.08em;
+    line-height: 0.9;
+  }
+
+  &__eyebrow {
+    margin: 1.5rem 0 0.75rem;
+    color: $secondary;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    margin: 0;
+    color: $dark;
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+  }
+
+  &__message {
+    max-width: 34rem;
+    margin: 1.25rem auto 0;
+    color: #666;
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 2rem;
+
+    .btn {
+      min-width: 11rem;
+      padding: 0.7rem 1.1rem;
+      font-weight: 600;
+    }
+  }
+
+  &__hint {
+    margin: 2rem 0 0;
+    color: #888;
+    font-size: 0.875rem;
+
+    a {
+      color: $primary;
+      font-weight: 600;
+    }
+  }
+}
+
+[data-bs-theme="dark"] {
+  .td-404 {
+    &::before {
+      background-image: linear-gradient(rgba(192, 224, 222, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(192, 224, 222, 0.06) 1px, transparent 1px);
+    }
+
+    &__glow {
+      background: rgba(48, 99, 142, 0.2);
+    }
+
+    h1 {
+      color: #f5f7fa;
+    }
+
+    &__message {
+      color: #b5bdc8;
+    }
+
+    &__hint {
+      color: #8993a0;
+    }
+  }
+}
+
 // Homepage
 .td-home {
   .td-main {
