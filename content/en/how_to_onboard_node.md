@@ -34,17 +34,21 @@ We do need to run quite some setups on the machine:
 
 the tool is open sourced here: https://github.com/kubehub-io/cli, so you can inspect, also if you need customize, feel free to change and compile, you are welcome to send PR as well. 
 
-Here is the command you will need to run, be sure to **SSH into the node** (for better auth experience, explained later) and run:
+From the Kubehub portal, you can copy a setup script with an embedded authentication token. Run that script on the node to authenticate it and start the setup.
+
+Alternatively, download and install `kubehubcli` yourself, then **SSH into the node** and run:
 
 ```bash
-CLUSTER=<clusterName>
 ARCH="$(uname -m | sed 's/aarch64/arm64/')"
-sudo curl -o /usr/bin/kubehubcli -L https://github.com/kubehub-io/cli/releases/download/latest/cli_Linux_$(ARCH)
-
+sudo curl -o /usr/bin/kubehubcli -L "https://github.com/kubehub-io/cli/releases/download/latest/cli_Linux_${ARCH}"
 sudo chmod +x /usr/bin/kubehubcli
 
+CLUSTER=<clusterName>
 sudo kubehubcli node join --cluster $CLUSTER
 ```
+
+Running the command yourself lets you configure the node parameters during setup.
+Because this command does not include the portal's embedded token, you will need to complete the device login when prompted.
 
 ### Tip: sign in from your own machine
 

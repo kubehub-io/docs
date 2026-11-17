@@ -4,7 +4,7 @@ type: docs
 weight: 5
 ---
 
-Your app is live at `your-app.xxx.mykube.app` and working great. But you'd rather use your own domain — something like `app.yourdomain.com` or `dashboard.yourdomain.io`.
+Your app is live at a generated Kubehub hostname such as `your-app-xxxxxx.mykube.app`. You can use your own domain instead — for example, `app.yourdomain.com` or `dashboard.yourdomain.io`.
 
 This guide shows you how to point your own domain to your Kubehub app using a cloud DNS or CDN provider. The general idea is the same everywhere: create a DNS record that points to your app's Kubehub URL, then configure TLS (the secure connection) so visitors see a padlock, not a warning.
 
@@ -17,7 +17,7 @@ If you already use Cloudflare for DNS, this is the quickest path.
    - **Name:** the domain you want (e.g. `app` for `app.yourdomain.com`)
    - **Target:** `your-app.xxx.mykube.app`
    - **Proxy status:** Proxied (orange cloud ON)
-2. In the Kubehub portal, open your app's **AppIngress** page, edit the ingress, and add your custom domain (e.g. `app.yourdomain.com`).
+2. Set `spec.customDomainName` to `app.yourdomain.com` in your `HubHttpRoute` manifest and apply it.
 
 That's it. Cloudflare handles TLS automatically when the proxy is on.
 
@@ -32,7 +32,7 @@ The CloudFront free tier (1 TB of data transfer per month) is more than enough f
 4. Under **Custom SSL certificate**, select or request an ACM certificate for your domain. (You must validate domain ownership in ACM first.)
 5. Create the distribution.
 6. In your DNS provider (Route 53 or elsewhere), create a `CNAME` record pointing `app.yourdomain.com` to the CloudFront distribution domain name (e.g. `d1234abcdef.cloudfront.net`).
-7. In the Kubehub portal, open your app's **AppIngress** page, edit the ingress, and add your custom domain.
+7. Set `spec.customDomainName` to `app.yourdomain.com` in your `HubHttpRoute` manifest and apply it.
 
 CloudFront terminates TLS for your visitors and forwards traffic to your Kubehub app over HTTPS.
 
@@ -51,7 +51,7 @@ CloudFront terminates TLS for your visitors and forwards traffic to your Kubehub
 4. Under **Custom domains**, add your domain (e.g. `app.yourdomain.com`). Front Door requires you to validate ownership — follow the DNS TXT record steps Azure shows you.
 5. Under **TLS/SSL settings**, select the certificate Azure provisioned for your custom domain.
 6. In your DNS provider, create a `CNAME` record pointing `app.yourdomain.com` to the Front Door endpoint (e.g. `your-profile.azurefd.net`).
-7. In the Kubehub portal, open your app's **AppIngress** page, edit the ingress, and add your custom domain.
+7. Set `spec.customDomainName` to `app.yourdomain.com` in your `HubHttpRoute` manifest and apply it.
 
 Azure Front Door terminates TLS and routes traffic to your Kubehub app.
 
@@ -65,7 +65,7 @@ Azure Front Door terminates TLS and routes traffic to your Kubehub app.
 5. Create a **forwarding rule** with a global static IP address.
 6. Under **Custom domains**, add `app.yourdomain.com` and attach the managed SSL certificate (GCP can provision one for you if you own the domain in Cloud DNS).
 7. In Cloud DNS (or your DNS provider), create an `A` record pointing `app.yourdomain.com` to the static IP from step 5.
-8. In the Kubehub portal, open your app's **AppIngress** page, edit the ingress, and add your custom domain.
+8. Set `spec.customDomainName` to `app.yourdomain.com` in your `HubHttpRoute` manifest and apply it.
 
 GCP handles TLS termination and load balancing. Traffic reaches your Kubehub app over HTTPS.
 
