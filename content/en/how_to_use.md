@@ -38,6 +38,9 @@ Once your node is onboarded, your cluster is alive. Now you can:
 
 ## 5. Expose your apps
 
-Got an app you want to share? We handle the tricky parts (addresses and secure connections) for you — either to the public internet or just your home network. See [How to Expose Apps](/how_to_expose_apps/).
+Got an app you want to share? Choose the exposure method that fits your experience and network:
+
+- **Use [HubHttpRoute](/use_hubhttproute/) for the easy option.** It uses Kubehub's public proxy and automatically provides a public HTTPS URL. You can create it with minimal networking knowledge and start using it right away.
+- **Use [HubGatewayProfile](/use_hubgatewayprofile/) for advanced setups.** It exposes apps directly through your own network, without relying on Kubehub's public proxy. It is a separate option from `HubHttpRoute`; a `HubHttpRoute` cannot attach to a `HubGatewayProfile`.
 
 That's it. From an old laptop to your own personal cloud in a few steps.

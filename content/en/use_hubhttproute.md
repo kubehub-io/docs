@@ -59,6 +59,8 @@ metadata:
   name: samplewebapp
   namespace: default
 spec:
+  # Optional: replace the generated hostname with your own domain.
+  customDomainName: demo.podnest.io
   rules:
     - matches:
         - path:
@@ -131,6 +133,10 @@ matches:
 
 Expected behavior: requests to `/api` and `/api/...` are sent to the referenced service; other paths do not match this rule.
 
+## Configure a custom domain
+
+Set `.spec.customDomainName` to your domain, then follow [Bring Your Own Domain](./bring_your_own_domain.md) to configure it with Cloudflare, AWS CloudFront, Azure Front Door, or another supported provider.
+
 ## How HubHttpRoute works
 
 `HubHttpRoute` is similar to a Kubernetes Gateway API `HTTPRoute`, with two differences:
@@ -157,3 +163,7 @@ kubectl get endpoints samplewebapp
 ```
 
 Expected output lists at least one pod IP and port. If no endpoints are listed, check that the service selector matches the labels on your application pods and that the pods are ready.
+
+## Reference
+
+CRD defined here: https://github.com/kubehub-io/cluster-artifacts/blob/main/crds/hubhttproute.gateway.kubehub.io.yaml
